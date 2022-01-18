@@ -1,0 +1,76 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%@page import="java.util.Random" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
+<%
+    ServletContext context = request.getServletContext();
+    String keyActiveUsers = "users_active_on_server";
+    Boolean isLogin = request.getParameter("user") != null;
+    Boolean isSessionActive = session.getAttribute("session_name") != null;
+    Boolean isLogout = request.getParameter("logout") != null;
+    String nameSession = String.valueOf(session.getAttribute("session_name"));
+    String nameParameter = String.valueOf(request.getParameter("user"));
+    List<String> usersActiveServer = (List) context.getAttribute(keyActiveUsers);
+
+    if (isLogout) {
+        session.removeAttribute("session_name");
+        usersActiveServer.remove(usersActiveServer.indexOf(nameSession));
+        response.sendRedirect(request.getRequestURI());
+    } else if (isLogin) {
+        session.setAttribute("session_name", nameParameter);
+        List numbersOfUserServer = (List) context.getAttribute(nameParameter);
+        List<Integer> randomNumbers = numbersOfUserServer != null ? numbersOfUserServer : new ArrayList<>();
+        if(randomNumbers.isEmpty()){
+            Random generate = new Random();
+            for(Integer i = 0; i < 6; i++){
+                Integer number = 1 + generate.nextInt(59);
+                if(randomNumbers.indexOf(number) == -1){
+                    randomNumbers.add(number);
+                    continue;
+                }
+                i--;
+            }
+            context.setAttribute(nameParameter, randomNumbers);
+        }
+        if (usersActiveServer == null) {
+            List<String> usersActive = new ArrayList<>();
+            usersActive.add(nameParameter);
+            context.setAttribute(keyActiveUsers, usersActive);
+        } else {
+            usersActiveServer.add(nameParameter);
+            context.setAttribute(keyActiveUsers, usersActiveServer);
+        }
+        response.sendRedirect(request.getRequestURI());
+    }
+%>
+
+<%if(isSessionActive){%>
+<header>
+    <h3>Bem vindo, <%=nameSession%> </h3>
+<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap/bootstrap/css/bootstrap.css">
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><a href="index.jsp">Página Inicial</a></li>
+    <li class="list-group-item"><a href="anajulia.jsp">Sobre Mim </a></li>
+    <li class="list-group-item"><a href="anajulia-megasena.jsp">Sorteio Números</a></li>
+</ul>
+    
+   
+    <form>
+        <input type="submit" value="Sair" name="logout" />
+    </form>
+</header>
+<%} else {%>
+<header>
+    <form>
+        <input type="text" id="user" name="user" placeholder="Digite seu nome" class="form-control" required />
+        <input type="submit" class="btn btn-outline-primary" value="Fazer login" />
+
+    </form>
+</header>
+
+<body>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap/bootstrap/css/bootstrap.css">
+
+</body>
+<%}%>

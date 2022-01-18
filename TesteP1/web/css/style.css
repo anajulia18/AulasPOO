@@ -1,0 +1,108 @@
+*{
+    font-family: 'Roboto', sans-serif;    
+    box-sizing: border-box;
+    line-height: 25px;
+    
+    
+} 
+
+
+header{
+    min-height: 50px;
+    padding: 10px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #B980F0;    
+    color: #fff;    
+  
+   
+}
+a{
+    text-decoration: none;
+    color:#fff;
+}
+
+
+
+body{
+    background-color: #252525;
+    color: #fff;
+}
+
+
+form{
+    
+    
+    min-width: 30vw;
+    margin:10px;
+    padding: 10px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 5px 5px #151515;
+    background-color: #252525;
+    
+    
+}
+
+#btn-calendar{
+    background-color: #B980F0;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+    border: none;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 5px 5px 5px #151515;
+    
+}
+
+.form-img{
+    width: 150px;
+}
+
+form input, .select-month{
+    border:none;
+    border-radius: 5px;
+    text-align:center;
+    margin: 10px;
+}
+
+
+.fields{
+    color:#000;
+}
+
+.calendar{
+    
+    box-shadow: 5px 5px 5px #151515;
+    min-width: 30vw;
+    min-height: 40vh;
+    
+    
+}
+
+table{
+    color: white;
+    margin:10px;
+    border-radius: 5px;   
+}
+
+table tr{
+    background-color: #252525;
+}
+
+.week{
+    background-color: #3D087B;
+    
+}
+
+.month{
+    background-color: #202040;
+}
+
+.information{
+    text-align: left;    
+    background-color: white;
+}
+
+.information th{
+    padding: 10px;
+}
